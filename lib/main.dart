@@ -1,68 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shopping_cart/pages/home_page.dart';
-import 'package:shopping_cart/pages/profile_page.dart';
-import 'package:shopping_cart/pages/settings_page.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+   await Hive.openBox('myBox');
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BottomNavExample(),
-    );
-  }
-}
-
-class BottomNavExample extends StatefulWidget {
-  const BottomNavExample({super.key});
-
-  @override
-  State<BottomNavExample> createState() => _BottomNavExampleState();
-}
-
-class _BottomNavExampleState extends State<BottomNavExample> {
-  int _currentIndex = 0;
-
-  final pages = [HomePage(), ProfilePage(), SettingsPage()];
-
-  void onItemClick(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Bottom Navigation Example",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.normal,
-          ),
+      home: HomePage(),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.yellow,
+          foregroundColor: Colors.black,
         ),
-      ),
-      body: pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: onItemClick,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
-          ),
-        ],
       ),
     );
   }
