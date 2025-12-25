@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_cart/models/cart.dart';
-import 'package:shopping_cart/pages/home_page.dart';
-import 'package:shopping_cart/pages/intro_page.dart';
+import 'package:shopping_cart/home_page.dart';
+import 'package:shopping_cart/theme/theme_provider.dart';
+import 'package:shopping_cart/theme/themes.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -18,20 +23,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Cart(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: IntroPage(),
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
-          appBarTheme: AppBarTheme(
-            backgroundColor: Colors.yellow,
-            foregroundColor: Colors.black,
-          ),
-        ),
-      ),
-    );
+    return MaterialApp(
+      theme: Provider.of<ThemeProvider>(context).themeData,
+      home: HomePage(),
+    );  
+
   }
 }
