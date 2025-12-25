@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_cart/home_page.dart';
-import 'package:shopping_cart/theme/theme_provider.dart';
-import 'package:shopping_cart/theme/themes.dart';
+import 'package:shopping_cart/model/shop.dart';
+import 'package:shopping_cart/pages/cart_page.dart';
+import 'package:shopping_cart/pages/intro_page.dart';
+import 'package:shopping_cart/pages/shop_page.dart';
+import 'package:shopping_cart/theme/theme.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+      create: (context) => ShopModel(),
       child: const MyApp(),
     ),
   );
@@ -24,9 +26,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: Provider.of<ThemeProvider>(context).themeData,
-      home: HomePage(),
-    );  
-
+      theme: lightTheme,
+      home: IntroPage(),
+      routes: {
+        '/intro': (context) => IntroPage(),
+        '/shop': (context) => ShopPage(),
+        '/cart': (context) => CartPage(),
+      },
+    );
   }
 }
