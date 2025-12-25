@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:shopping_cart/component/dilaog_box.dart';
-import 'package:shopping_cart/component/list_title.dart';
-import 'package:shopping_cart/to_do_database.dart';
+import 'package:shopping_cart/component/bottom_nav.dart';
+import 'package:shopping_cart/pages/cart_pages.dart';
+import 'package:shopping_cart/pages/shop_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,78 +11,74 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final mybox = Hive.box('myBox');
+  int _selectedIndex = 0;
 
-  ToDoDatabase database = ToDoDatabase();
+  List<Widget> pages = [ShopPage(), CartPage()];
 
-  final TextEditingController _controller = TextEditingController();
-
-  @override
-  void initState() {
-    if (mybox.get('todoList') == null) {
-      database.createInitialData();
-    } else {
-      database.loadData();
-    }
-    super.initState();
-  }
-
-  void changeCheckBox(int index, bool? value) {
+  void navigateBottonBar(int position) {
     setState(() {
-      database.todoList[index][1] = !database.todoList[index][1];
-      database.updateDatabase();
+      _selectedIndex = position;
     });
-  }
-
-  void saveNewTask() {
-    setState(() {
-      database.todoList.add([_controller.text, false]);
-      _controller.clear();
-      Navigator.of(context).pop();
-      database.updateDatabase();
-    });
-  }
-
-  void deleteTask(int index) {
-    setState(() {
-      database.todoList.removeAt(index);
-    });
-    database.updateDatabase();
-  }
-
-  void createTask() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DialogBox(
-          controller: _controller,
-          onSave: saveNewTask,
-          onCancel: () {
-            Navigator.of(context).pop();
-          },
-        );
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[200],
-      appBar: AppBar(title: const Text("To Do App")),
-      floatingActionButton: FloatingActionButton(
-        onPressed: createTask,
-        child: const Icon(Icons.add),
+      backgroundColor: Colors.grey[300],
+      bottomNavigationBar: BottomNav(
+        tabChanged: (index) => navigateBottonBar(index),
       ),
-      body: ListView.builder(
-        itemCount: database.todoList.length,
-        itemBuilder: (context, index) => ListTitle(
-          title: database.todoList[index][0],
-          isTaskCompleted: database.todoList[index][1],
-          onChanged: (value) => changeCheckBox(index, value),
-          deleteFunction: (context) => deleteTask(index),
+      appBar: AppBar(
+        title: const Text('Shopping Cart'),
+        backgroundColor: Colors.transparent,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Icon(Icons.menu, color: Colors.black),
+            ),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
         ),
       ),
+      drawer: Drawer(
+        backgroundColor: Colors.grey[900],
+        child: Column(
+          children: [
+            DrawerHeader(
+              child: Image.asset(
+                'lib/images/vecteezy_nike.png',
+                color: Colors.white,
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: Icon(Icons.home, color: Colors.white),
+                title: Text('Home', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: Icon(Icons.info, color: Colors.white),
+                title: Text('About', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: Icon(Icons.logout, color: Colors.white),
+                title: Text('Logout', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: pages[_selectedIndex],
     );
   }
 }

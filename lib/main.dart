@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_cart/models/cart.dart';
 import 'package:shopping_cart/pages/home_page.dart';
+import 'package:shopping_cart/pages/intro_page.dart';
 
-void main() async {
-  await Hive.initFlutter();
-   await Hive.openBox('myBox');
-  runApp(MyApp());
+void main() {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -19,15 +18,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.yellow,
-          foregroundColor: Colors.black,
+    return ChangeNotifierProvider(
+      create: (context) => Cart(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: IntroPage(),
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.yellow,
+            foregroundColor: Colors.black,
+          ),
         ),
       ),
     );
