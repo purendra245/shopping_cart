@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_cart/model/note_database.dart';
-import 'package:shopping_cart/pages/note_page.dart';
+import 'package:shopping_cart/database/habit_database.dart';
+import 'package:shopping_cart/pages/home_page.dart';
 import 'package:shopping_cart/themes/theme_provider.dart';
 
 Future<void> main() async {
   //init database
   WidgetsFlutterBinding.ensureInitialized();
-  await NoteDatabase.init();
+  await HabitDatabase.init();
+  await HabitDatabase().saveFirstLaunchDate();
 
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => NoteDatabase()),
-        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HabitDatabase(),
+        ),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -31,7 +36,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const NotePage(),
+      home: HomePage(),
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
