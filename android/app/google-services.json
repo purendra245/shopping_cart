@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "518238869856",
+    "project_id": "ftest-firebase",
+    "storage_bucket": "ftest-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518238869856:android:6bc6ffbb225ce9222c2605",
+        "android_client_info": {
+          "package_name": "com.example.shopping.shopping_cart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAm1xUyhvHNxEJ1k_Cs_7c4OWjUztslCi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
