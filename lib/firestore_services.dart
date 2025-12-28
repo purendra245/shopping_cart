@@ -8,8 +8,28 @@ class FirestoreServices {
     await _noteCollection.add({"note": note, 'timestamp': Timestamp.now()});
   }
 
-  Stream<QuerySnapshot> getNotes() {
-    return _noteCollection.orderBy('timestamp', descending: true).snapshots();
+  Stream<List<Map<String, dynamic>>> getNotes() {
+    // return _notesCollection
+    //     .orderBy('timestamp', descending: true) // Sort logic
+    //     .snapshots()
+    //     .map((snapshot) {
+    //       return snapshot.docs.map((doc) {
+    //         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    //         data['id'] = doc.id;
+    //         return data;
+    //       }).toList();
+    //     }); OR
+
+    return _noteCollection
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs
+              .map(
+                (doc) => {...doc.data() as Map<String, dynamic>, 'id': doc.id},
+              )
+              .toList(),
+        );
   }
 
   Future<void> deleteNote(String id) async {

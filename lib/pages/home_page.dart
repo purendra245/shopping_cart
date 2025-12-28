@@ -62,21 +62,19 @@ class _HomePageState extends State<HomePage> {
         title: Text("Home Page", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
       ),
-      body: StreamBuilder<QuerySnapshot>(
+      body: StreamBuilder<List<Map<String, dynamic>>>(
         stream: firestoreServices.getNotes(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             Utils.showSnackBar(context, snapshot.error.toString());
           }
           if (snapshot.hasData) {
-            List notesList = snapshot.data!.docs;
+            List notesList = snapshot.data!;
             return ListView.builder(
               itemCount: notesList.length,
               itemBuilder: (context, index) {
-                DocumentSnapshot document = notesList[index];
-                String noteId = document.id;
-                Map<String, dynamic> noteData =
-                    document.data() as Map<String, dynamic>;
+                Map<String, dynamic> noteData = notesList[index];
+                String noteId = noteData['id'];
                 String noteText = noteData['note'];
 
                 return MyListTile(
