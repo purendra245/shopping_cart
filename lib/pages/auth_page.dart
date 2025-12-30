@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shopping_cart/pages/home_page.dart';
 import 'package:shopping_cart/pages/register_or_login_page.dart';
-import 'package:shopping_cart/pages/users_page.dart';
 import 'package:shopping_cart/services/auth_service.dart';
 import 'package:shopping_cart/utils/app_utils.dart';
 
@@ -17,7 +17,7 @@ class AuthPage extends StatelessWidget {
           Utils.showSnackBar(context, snapshot.error.toString());
           return const Center(child: Text("Something went wrong"));
         } else if (snapshot.hasData) {
-          return UsersPage();
+          return HomePage();
         } else {
           return RegisterOrLoginPage();
         }

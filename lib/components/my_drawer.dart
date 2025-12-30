@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_cart/pages/profle_page.dart';
 import 'package:shopping_cart/pages/setting_page.dart';
 import 'package:shopping_cart/services/auth_service.dart';
 
@@ -18,9 +19,9 @@ class MyDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             child: Icon(
-              Icons.chat_rounded,
+              Icons.favorite,
               size: 50,
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
 
@@ -29,7 +30,7 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               leading: Icon(
                 Icons.home,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
               title: Text(
                 "HOME",
@@ -46,21 +47,56 @@ class MyDrawer extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20.0),
             child: ListTile(
               leading: Icon(
-                Icons.settings,
-                color: Theme.of(context).colorScheme.primary,
+                Icons.person,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
               title: Text(
-                "SETTINGS",
+                "PROFILE",
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onInverseSurface,
                 ),
               ),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SettingPage()),
-                );
+                Navigator.pushNamed(context, '/profile_page');
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: ListTile(
+              leading: Icon(
+                Icons.group,
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+              title: Text(
+                "USERS",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onInverseSurface,
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/users_page');
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: ListTile(
+              leading: Icon(
+                Icons.settings,
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+              title: Text(
+                "Settings",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onInverseSurface,
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/setting_page');
               },
             ),
           ),
@@ -70,7 +106,7 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               leading: Icon(
                 Icons.logout,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
               title: Text(
                 "LOGOUT",

@@ -100,15 +100,15 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.chat_rounded,
+                  Icons.person,
                   size: 80,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.onSecondary,
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 Text(
-                  'Welcome back you\'ve been missed!',
+                  'S O C I A L',
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 18,
                     color: Theme.of(context).colorScheme.onSecondary,
                   ),
                 ),
