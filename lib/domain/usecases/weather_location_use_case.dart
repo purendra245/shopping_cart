@@ -1,4 +1,4 @@
-import 'package:shopping_cart/data/repositories/weather_location_repo.dart';
+import 'package:shopping_cart/domain/repositories/weather_location_repo.dart';
 
 class WeatherLocationUseCase {
   final WeatherLocationRepo weatherLocationRepo;

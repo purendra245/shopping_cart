@@ -1,5 +1,5 @@
 import 'package:shopping_cart/core/network/api_services.dart';
-import 'package:shopping_cart/data/repositories/weather_repository.dart';
+import 'package:shopping_cart/domain/repositories/weather_repository.dart';
 import 'package:shopping_cart/domain/entities/weather_entity.dart';
 import 'package:logger/logger.dart';
 
