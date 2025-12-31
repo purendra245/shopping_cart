@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shopping_cart/pages/home_page.dart';
+import 'package:shopping_cart/di/module.dart';
+import 'package:shopping_cart/presentation/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  Module().init();
   runApp(
     const MyApp(),
   );
