@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_cart/pages/home_page.dart';
+import 'package:shopping_cart/pages/mobile_page.dart';
+import 'package:shopping_cart/pages/responsive.dart';
+import 'package:shopping_cart/pages/tablet_page.dart';
+import 'package:shopping_cart/pages/webpage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +21,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: navigatorKey,
-      home: const HomePage(),
+      home: const ResponsiveLayout(
+        mobile: MobilePage(),
+        tablet: TabletPage(),
+        web: WebPage(),
+      ),
       routes: {'/home_page': (context) => const HomePage()},
     );
   }
