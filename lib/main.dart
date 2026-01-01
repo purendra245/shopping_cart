@@ -21,11 +21,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const ResponsiveLayout(
-        mobile: MobilePage(),
-        tablet: TabletPage(),
-        web: WebPage(),
-      ),
+      home: HomePage(),
       routes: {'/home_page': (context) => const HomePage()},
     );
   }
