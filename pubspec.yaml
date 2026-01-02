@@ -57,6 +57,7 @@ dependencies:
   bloc: ^9.1.0
   flutter_bloc: ^9.1.0
   firebase_messaging: ^16.1.0
+  audioplayers: ^6.5.1
   
 
 dev_dependencies:
@@ -86,9 +87,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/
-  #   - lib/images/
+  assets:
+    - assets/
+    - assets/images/
+    - assets/audios/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

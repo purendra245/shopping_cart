@@ -6,29 +6,58 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.grey[200],
-      child: ListView(
-        padding: EdgeInsets.zero,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      child: Column(
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
-            child: Icon(Icons.favorite, size: 50),
+          SizedBox(height: 50),
+          SizedBox(
+            height: 160,
+            child: Center(
+              child: Icon(
+                Icons.music_note,
+                size: 40,
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+            ),
           ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: const Text('Home'),
-            onTap: () {
-              // Handle item 1 tap
-              Navigator.pop(context);
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+            child: ListTile(
+              leading: Icon(
+                Icons.home,
+                color: Theme.of(context).colorScheme.onTertiary,
+              ),
+              title: Text(
+                'H O M E',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onTertiary,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
           ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: const Text('Settings'),
-            onTap: () {
-              // Handle item 2 tap
-              Navigator.pop(context);
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: ListTile(
+              leading: Icon(
+                Icons.settings,
+                color: Theme.of(context).colorScheme.onTertiary,
+              ),
+              title: Text(
+                'S E T T I N G S',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onTertiary,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/settings');
+              },
+            ),
           ),
         ],
       ),
